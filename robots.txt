@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /assets/
+Disallow: /cronjobs/
+Disallow: /incf/
+Disallow: /ladding/
+Disallow: /menu/
+Disallow: /naptien/
