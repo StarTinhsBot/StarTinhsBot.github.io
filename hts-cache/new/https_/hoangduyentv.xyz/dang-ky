@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--favicon-->
+    <link rel="icon" href="HOÀNG DUYÊN TV" type="image/png" />
+    <!--plugins-->
+    <link href="/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+    <link href="/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+    <link href="/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
+    <link href="/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
+    <!-- loader-->
+    <link href="/assets/css/pace.min.css" rel="stylesheet" />
+    <script src="/assets/js/pace.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/assets/css/app.css" rel="stylesheet" />
+    <link href="/assets/css/icons.css" rel="stylesheet" />
+    <!-- Theme Style CSS -->
+    <link rel="stylesheet" href="/assets/css/dark-theme.css" />
+    <link rel="stylesheet" href="/assets/css/semi-dark.css" />
+    <link rel="stylesheet" href="/assets/css/header-colors.css" />
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    <meta name="description" content="like giá rẻ chuyên cung cấp các giải pháp tăng like facebook Tăng like Facebook-Tăng like Fanpage-Tăng lượt theo dõi Facebook-Tăng mắt livestream-Tăng like Instargram-Tăng theo dõi Instargram-Tăng like-tăng theo dõi-tăng view Youtube-Tang like Facebook-Tang like Fanpage Tang luot theo doi Facebook Tang mat livestream Tang like Instargram Tang theo doi Instargram Tang like tang theo doi tang view Youtube">
+    <meta name="keywords" content="dịch vụ like giá rẻ chuyên cung cấp các giải pháp tăng like facebook Tăng like Facebook-Tăng like Fanpage-Tăng lượt theo dõi Facebook-Tăng mắt livestream-Tăng like Instargram-Tăng theo dõi Instargram,Tăng like-tăng theo dõi-tăng view Youtube-Tang like Facebook Tang like Fanpage Tang luot theo doi Facebook Tang mat livestream Tang like Instargram Tang theo doi Instargram Tang like tang theo doi tang view Youtube">
+    <title></title>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/dark-mode-switcher.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    $(function () {
+        $(".knob").knob();
+    });
+</script>
+<script>
+    function getValueRadioByName(name) {
+        return $('input[name="' + name + '"]:checked').val();
+    }
+
+    function getValueSelectByName(name) {
+        return $('select[name=' + name + '] option').filter(':selected').val()
+    }
+
+    var chu_y_modal = 'Bạn đã đọc chú ý và lưu ý và bạn đã kiểm tra lại đơn hàng ?';
+    if (localStorage.getItem("theme-color")) {
+        theme = localStorage.getItem("theme-color");
+        if (theme === '#232a3b') {
+            $(".dark-mode-switchers__toggle").addClass("dark-mode-switcher__toggle--active");
+            $(".dark-mode-switchers__toggle").removeClass("border");
+            $(".dark-mode-switchers__toggle").removeClass("border-custom");
+            $('html').removeClass('light')
+            $('html').addClass('dark')
+            $('.app').css('background', '#232a3b')
+        } else {
+            $(".dark-mode-switchers__toggle").removeClass("dark-mode-switcher__toggle--active");
+            $(".dark-mode-switchers__toggle").addClass("border");
+            $(".dark-mode-switchers__toggle").addClass("border-custom");
+            $('html').removeClass('dark')
+            $('html').addClass('light')
+            $('.app').css('background', '#1C3FAA')
+        }
+    }
+
+    /*modal*/
+
+    function modalSuccess(message) {
+        swal({
+            title: "Thành công",
+            text: message,
+            icon: "success",
+        });
+    }
+
+    function modalError(message) {
+        swal({
+            title: "Thất bại",
+            text: message,
+            icon: "error",
+        });
+    }
+
+    function modalSubmitForm(message, form) {
+        swal({
+            title: "Bạn có chắc chắn ?",
+            text: message,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $('#' + form).submit();
+                    loading();
+                }
+            });
+    }
+
+    function loading() {
+        $('body').append('<div id="loader-wrapper">\n' +
+            '    <div id="loader"></div>\n' +
+            '</div>')
+    }
+
+    function stopLoading() {
+        $('#loader-wrapper').remove();
+    }
+
+    function getDataAttRadio(name, data_att) {
+        return $('input[name="' + name + '"]:checked').data(data_att);
+    }
+
+    function getDataInput(name) {
+        return $('input[name="' + name + '"]').val();
+    }
+
+    function addValueInput(name, value) {
+        $('input[name="' + name + '"]').val(value);
+    }
+
+    function addTextId(id, txt) {
+        $('#' + id).text(txt);
+    }
+
+    function formatNumber(num) {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    }
+
+    function copy(id) {
+        var copy = document.getElementById(id);
+        $("#" + id).prop("disabled", false);
+        copy.select();
+        document.execCommand("copy");
+        $("#" + id).prop("disabled", true);
+        modalSuccess("Copy thành công " + copy.value);
+    }
+
+    $(document).ready(function () {
+        $('#modal_guide').modal('toggle');
+    });
+</script>
+    <style>
+        .border_package {
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+
+        #loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            background-color: aliceblue
+        }
+
+        #loader {
+            display: block;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #3498db;
+            -webkit-animation: spin 2s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+            animation: spin 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+        }
+
+        #loader:before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #e74c3c;
+            -webkit-animation: spin 3s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+            animation: spin 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+        }
+
+        #loader:after {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #f9c922;
+            -webkit-animation: spin 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+            animation: spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+        }
+
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg); /* Chrome, Opera 15+, Safari 3.1+ */
+                -ms-transform: rotate(0deg); /* IE 9 */
+                transform: rotate(0deg); /* Firefox 16+, IE 10+, Opera */
+            }
+            100% {
+                -webkit-transform: rotate(360deg); /* Chrome, Opera 15+, Safari 3.1+ */
+                -ms-transform: rotate(360deg); /* IE 9 */
+                transform: rotate(360deg); /* Firefox 16+, IE 10+, Opera */
+            }
+        }
+
+        @keyframes  spin {
+            0% {
+                -webkit-transform: rotate(0deg); /* Chrome, Opera 15+, Safari 3.1+ */
+                -ms-transform: rotate(0deg); /* IE 9 */
+                transform: rotate(0deg); /* Firefox 16+, IE 10+, Opera */
+            }
+            100% {
+                -webkit-transform: rotate(360deg); /* Chrome, Opera 15+, Safari 3.1+ */
+                -ms-transform: rotate(360deg); /* IE 9 */
+                transform: rotate(360deg); /* Firefox 16+, IE 10+, Opera */
+            }
+        }
+
+        html.dark body *, html.dark body :after, html.dark body :before {
+            border-color: unset;
+        }
+
+        .modal {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            z-index: 1050 !important;
+            width: 100% !important;
+            height: 100% !important;
+            overflow: hidden !important;
+            outline: 0 !important;
+            margin-top: unset !important;
+            margin-left: unset !important;
+        }
+
+        html.dark .modal-title, html.dark p {
+            color: #000;
+        }
+    </style>
+</head>
+<body class="bg-login">
+<!--wrapper-->
+<div class="wrapper">
+    <div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
+        <div class="container-fluid">
+            <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
+                <div class="col mx-auto">
+                    <div class="mb-4 text-center">
+                        
+                        <h1></h1>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="border p-4 rounded">
+                                <div class="text-center">
+                                    <h3 class="">Đăng ký</h3>
+                                    <p>Bạn chưa có tài khoản? <a href="/dang-nhap">Đăng nhập tại đây</a>
+                                    </p>
+                                </div>
+                                <div class="login-separater text-center mb-4"><span>ĐĂNG KÝ</span>
+                                    <hr/>
+                                </div>
+                                <div class="form-body">
+                                                                        <form class="row g-3" action="/register" method="post" id="action_form">
+                                        <div class="col-12">
+                                            <label for="inputEmailAddress" class="form-label">Tên đăng nhập</label>
+                                            <input type="text" name="username" class="form-control"
+                                                   id="inputEmailAddress" placeholder="Tên đăng nhập">
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="inputChoosePassword" class="form-label">Mật khẩu</label>
+                                            <div class="input-group" id="show_hide_password">
+                                                <input type="password" class="form-control border-end-0"
+                                                       id="inputChoosePassword" name="password" value=""
+                                                       onkeypress="runScript(event)"
+                                                       placeholder="Enter Password"> <a href="javascript:;"
+                                                                                        class="input-group-text bg-transparent"><i
+                                                        class='bx bx-hide'></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="d-grid">
+                                                <button type="button"
+                                                        onclick="modalSubmitForm('Bạn đã chắc chắn chưa ?','action_form')"
+                                                        class="btn btn-primary"><i
+                                                        class="bx bxs-lock-open"></i>Đăng ký
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row-->
+        </div>
+    </div>
+</div>
+<!--end wrapper-->
+<!-- Bootstrap JS -->
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<!--plugins-->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/plugins/simplebar/js/simplebar.min.js"></script>
+<script src="assets/plugins/metismenu/js/metisMenu.min.js"></script>
+<script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+<!--Password show & hide js -->
+<script>
+    $(document).ready(function () {
+        $("#show_hide_password a").on('click', function (event) {
+            event.preventDefault();
+            if ($('#show_hide_password input').attr("type") == "text") {
+                $('#show_hide_password input').attr('type', 'password');
+                $('#show_hide_password i').addClass("bx-hide");
+                $('#show_hide_password i').removeClass("bx-show");
+            } else if ($('#show_hide_password input').attr("type") == "password") {
+                $('#show_hide_password input').attr('type', 'text');
+                $('#show_hide_password i').removeClass("bx-hide");
+                $('#show_hide_password i').addClass("bx-show");
+            }
+        });
+    });
+
+    function runScript(e) {
+        //See notes about 'which' and 'key'
+        if (e.keyCode == 13) {
+            modalSubmitForm('Bạn đã chắc chắn chưa ?', 'action_form')
+            return false;
+        }
+    }
+</script>
+<script src="/assets/js/dark-mode-switcher.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    $(function () {
+        $(".knob").knob();
+    });
+</script>
+<script>
+    function getValueRadioByName(name) {
+        return $('input[name="' + name + '"]:checked').val();
+    }
+
+    function getValueSelectByName(name) {
+        return $('select[name=' + name + '] option').filter(':selected').val()
+    }
+
+    var chu_y_modal = 'Bạn đã đọc chú ý và lưu ý và bạn đã kiểm tra lại đơn hàng ?';
+    if (localStorage.getItem("theme-color")) {
+        theme = localStorage.getItem("theme-color");
+        if (theme === '#232a3b') {
+            $(".dark-mode-switchers__toggle").addClass("dark-mode-switcher__toggle--active");
+            $(".dark-mode-switchers__toggle").removeClass("border");
+            $(".dark-mode-switchers__toggle").removeClass("border-custom");
+            $('html').removeClass('light')
+            $('html').addClass('dark')
+            $('.app').css('background', '#232a3b')
+        } else {
+            $(".dark-mode-switchers__toggle").removeClass("dark-mode-switcher__toggle--active");
+            $(".dark-mode-switchers__toggle").addClass("border");
+            $(".dark-mode-switchers__toggle").addClass("border-custom");
+            $('html').removeClass('dark')
+            $('html').addClass('light')
+            $('.app').css('background', '#1C3FAA')
+        }
+    }
+
+    /*modal*/
+
+    function modalSuccess(message) {
+        swal({
+            title: "Thành công",
+            text: message,
+            icon: "success",
+        });
+    }
+
+    function modalError(message) {
+        swal({
+            title: "Thất bại",
+            text: message,
+            icon: "error",
+        });
+    }
+
+    function modalSubmitForm(message, form) {
+        swal({
+            title: "Bạn có chắc chắn ?",
+            text: message,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $('#' + form).submit();
+                    loading();
+                }
+            });
+    }
+
+    function loading() {
+        $('body').append('<div id="loader-wrapper">\n' +
+            '    <div id="loader"></div>\n' +
+            '</div>')
+    }
+
+    function stopLoading() {
+        $('#loader-wrapper').remove();
+    }
+
+    function getDataAttRadio(name, data_att) {
+        return $('input[name="' + name + '"]:checked').data(data_att);
+    }
+
+    function getDataInput(name) {
+        return $('input[name="' + name + '"]').val();
+    }
+
+    function addValueInput(name, value) {
+        $('input[name="' + name + '"]').val(value);
+    }
+
+    function addTextId(id, txt) {
+        $('#' + id).text(txt);
+    }
+
+    function formatNumber(num) {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    }
+
+    function copy(id) {
+        var copy = document.getElementById(id);
+        $("#" + id).prop("disabled", false);
+        copy.select();
+        document.execCommand("copy");
+        $("#" + id).prop("disabled", true);
+        modalSuccess("Copy thành công " + copy.value);
+    }
+
+    $(document).ready(function () {
+        $('#modal_guide').modal('toggle');
+    });
+</script>
+<!--app JS-->
+<script src="assets/js/app.js"></script>
+</body>
